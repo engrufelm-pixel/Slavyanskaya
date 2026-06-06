@@ -1,0 +1,119 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --gold: #c8a86b;
+  }
+
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* Якоря не уезжают под фиксированный хедер */
+    scroll-padding-top: 5.5rem;
+  }
+
+  body {
+    @apply bg-ink text-white/85 font-sans antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Заголовочный гротеск — строгий: плотный трекинг и насыщенный вес по умолчанию */
+  .font-display {
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  ::selection {
+    background: rgba(200, 168, 107, 0.28);
+    color: #fff;
+  }
+
+  /* Премиальная тонкая золотая прокрутка */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0b0b0b;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #262626;
+    border-radius: 9999px;
+    border: 2px solid #0b0b0b;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--gold);
+  }
+
+  /* Доступный фокус */
+  :focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  .container-px {
+    @apply mx-auto w-full max-w-container px-5 sm:px-8 lg:px-12;
+  }
+
+  /* Надзаголовок-«надпись» секции */
+  .eyebrow {
+    @apply inline-flex items-center gap-3 text-[0.7rem] font-medium uppercase tracking-widest2 text-gold;
+  }
+  .eyebrow::before {
+    content: '';
+    @apply h-px w-8 bg-gold/60;
+  }
+
+  /* Золотая «волосяная» линия-разделитель */
+  .hairline {
+    @apply h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent;
+  }
+
+  /* Базовая кнопка */
+  .btn {
+    @apply inline-flex select-none items-center justify-center gap-2.5 rounded-full px-7 py-3.5 text-sm font-semibold tracking-wide transition-all duration-300 ease-premium active:scale-[0.98];
+  }
+  .btn-gold {
+    @apply btn bg-gold text-ink hover:bg-gold-soft hover:shadow-gold;
+  }
+  .btn-outline {
+    @apply btn border border-white/20 text-white hover:border-gold hover:text-gold;
+  }
+  .btn-ghost {
+    @apply btn text-white/70 hover:text-gold;
+  }
+}
+
+@layer utilities {
+  /* Сетка-фактура «дорогой» поверхности */
+  .bg-grain {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Лёгкая премиальная цветокоррекция — цвет сохраняем, не обесцвечиваем */
+  .img-tone {
+    filter: contrast(1.06) saturate(1.08) brightness(0.97);
+  }
+}
+
+/* Уважение к prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
