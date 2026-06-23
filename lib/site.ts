@@ -29,8 +29,12 @@ export interface ServiceItem {
 export interface GalleryItem {
   src: string;
   alt: string;
+  /** Заголовок в лайтбоксе (для авто — модель/объект, для прочего — название изделия) */
   car: string;
+  /** Подпись/вид работы */
   work: string;
+  /** Категория для вкладок галереи */
+  category: 'auto' | 'other';
   /** Крупная плитка в бенто-сетке */
   wide?: boolean;
   tall?: boolean;
@@ -68,8 +72,8 @@ export const carBrands = [
 export const contacts = {
   phoneDisplay: '+7 913 754-81-42',
   phoneHref: 'tel:+79137548142',
-  // Мессенджер MAX — вставьте реальную ссылку на профиль (https://max.ru/...)
-  max: 'https://max.ru/',
+  // Мессенджер MAX — ссылка на профиль мастера
+  max: 'https://max.ru/u/f9LHodD0cOIQfzRodi8Mq_A8ssv20YTXYZYsLTpN2R9K3AolGX5Xr3PjiJg',
   email: 'master@slav-masterskaya.ru',
   address: 'Выборная улица, 141А',
   addressFull: 'Россия, Новосибирск, Выборная улица, 141А',
@@ -127,25 +131,39 @@ export const advantages: { icon: IconName; title: string; text: string }[] = [
   },
 ];
 
-// --- ГАЛЕРЕЯ (≥12 работ) ---------------------------------------------------
-// Временные стоковые фото авто-интерьеров (Pexels). Замените на реальные фото
-// работ мастерской: положите в /public и укажите путь вида '/works/xxx.jpg'.
-const px = (path: string) =>
-  `https://images.pexels.com/photos/${path}?auto=compress&cs=tinysrgb&w=1600`;
-
+// --- ГАЛЕРЕЯ (реальные работы мастерской) ----------------------------------
+// Фото в /public/works. Чтобы добавить новые — положите файл в эту папку
+// и допишите элемент ниже (src вида '/works/имя.jpg').
 export const gallery: GalleryItem[] = [
-  { src: px('26871052/pexels-photo-26871052/free-photo-of-beige-interior-of-a-mercedes-amg-s-63.jpeg'), alt: 'Светлый кожаный салон Mercedes-Benz', car: 'Mercedes-Benz S-Class Coupé', work: 'Перетяжка салона в светлую кожу', wide: true },
-  { src: px('16716122/pexels-photo-16716122/free-photo-of-interior-of-mercedes-benz-sl500.jpeg'), alt: 'Спортивные сиденья с ромбовидной прострочкой', car: 'Mercedes-Benz S-Class', work: 'Сиденья: ромбовидная прострочка' },
-  { src: px('36646940/pexels-photo-36646940/free-photo-of-luxurious-tan-interior-of-modern-suv.jpeg'), alt: 'Салон Range Rover в коже cognac', car: 'Land Rover Range Rover', work: 'Перетяжка салона в кожу cognac' },
-  { src: px('29566891/pexels-photo-29566891/free-photo-of-luxury-car-interior-with-elegant-red-upholstery.jpeg'), alt: 'Салон в красной коже после перетяжки', car: 'Genesis G90', work: 'Перетяжка салона в красную кожу', tall: true },
-  { src: px('36742939/pexels-photo-36742939/free-photo-of-luxury-car-interior-with-sleek-dashboard-and-controls.jpeg'), alt: 'Руль и панель в коже и алькантаре', car: 'Jaguar F-Pace', work: 'Руль в коже и алькантаре' },
-  { src: px('29566882/pexels-photo-29566882/free-photo-of-luxury-car-interior-with-red-leather-details.jpeg'), alt: 'Руль и акценты в красной коже', car: 'Genesis G80', work: 'Руль и акценты в красной коже' },
-  { src: px('18262231/pexels-photo-18262231/free-photo-of-interior-of-a-vintage-car-with-leather-seats.jpeg'), alt: 'Реставрация кожи и деревянного шпона', car: 'Bentley', work: 'Реставрация кожи и шпона', wide: true },
-  { src: px('9636453/pexels-photo-9636453.jpeg'), alt: 'Спортивное сиденье в красной коже', car: 'Volkswagen Golf GTI', work: 'Спортивное сиденье в красной коже' },
-  { src: px('18262223/pexels-photo-18262223/free-photo-of-interior-of-a-vintage-car-with-leather-seats.jpeg'), alt: 'Салон кабриолета в коже cognac', car: 'Bentley Continental', work: 'Перетяжка в кожу cognac', tall: true },
-  { src: px('26691305/pexels-photo-26691305/free-photo-of-interior-of-mercedes-s450.jpeg'), alt: 'Реставрация светлого кожаного салона', car: 'Mercedes-Benz S-Class', work: 'Реставрация кожи салона' },
-  { src: px('29370663/pexels-photo-29370663/free-photo-of-luxury-interior-of-a-high-end-car-with-wood-finish.jpeg'), alt: 'Деревянный шпон и кожа в интерьере', car: 'Rolls-Royce', work: 'Шпон и кожа: элементы интерьера' },
-  { src: px('17769186/pexels-photo-17769186/free-photo-of-interior-of-a-vintage-mercedes-car.jpeg'), alt: 'Реставрация классического красного салона', car: 'Mercedes-Benz 300 SL', work: 'Реставрация классического салона' },
+  // --- Авто ---
+  { src: '/works/auto-10.jpg', category: 'auto', alt: 'Toyota Land Cruiser Prado — передние сиденья в чёрной коже с ромбом', car: 'Toyota Land Cruiser Prado', work: 'Перетяжка сидений в кожу, ромб' },
+  { src: '/works/auto-07.jpg', category: 'auto', alt: 'Кожаное сиденье спецтехники с ромбовидной прострочкой', car: 'Спецтехника', work: 'Сиденье в коже, ромб', tall: true },
+  { src: '/works/auto-12.jpg', category: 'auto', alt: 'Двухцветный красно-чёрный салон с ромбом на дверной карте', car: 'Перетяжка салона', work: 'Красно-чёрная кожа, ромб' },
+  { src: '/works/auto-04.jpg', category: 'auto', alt: 'Спортивные сиденья RECARO после перетяжки', car: 'Сиденья RECARO', work: 'Перетяжка спортивных сидений' },
+  { src: '/works/auto-15.jpg', category: 'auto', alt: 'Дверная карта с ромбовидной прострочкой', car: 'Toyota Land Cruiser Prado', work: 'Дверные карты, ромб' },
+  { src: '/works/auto-11.jpg', category: 'auto', alt: 'Перетяжка руля Toyota в коже', car: 'Toyota Land Cruiser Prado', work: 'Руль в коже', wide: true },
+  { src: '/works/auto-02.jpg', category: 'auto', alt: 'Перетяжка передних сидений в чёрную экокожу', car: 'Перетяжка салона', work: 'Передние сиденья' },
+  { src: '/works/auto-08.jpg', category: 'auto', alt: 'Бежевое кожаное сиденье с перфорацией', car: 'Перетяжка сиденья', work: 'Светлая кожа, перфорация' },
+  { src: '/works/auto-06.jpg', category: 'auto', alt: 'Сиденье скутера в коричневой коже', car: 'Сиденье скутера', work: 'Перетяжка в кожу', tall: true },
+  { src: '/works/auto-09.jpg', category: 'auto', alt: 'Ретро-сиденье в коричневой коже и замше', car: 'Ретро-сиденье', work: 'Кожа и замша' },
+  { src: '/works/auto-13.jpg', category: 'auto', alt: 'Toyota Land Cruiser Prado — задний диван в чёрной коже', car: 'Toyota Land Cruiser Prado', work: 'Задний диван в коже', wide: true },
+  { src: '/works/auto-14.jpg', category: 'auto', alt: 'Toyota Land Cruiser Prado — руль и панель после перетяжки', car: 'Toyota Land Cruiser Prado', work: 'Руль и элементы салона' },
+  { src: '/works/auto-01.jpg', category: 'auto', alt: 'Авточехлы с контрастной строчкой', car: 'Авточехлы', work: 'Пошив чехлов' },
+  { src: '/works/auto-03.jpg', category: 'auto', alt: 'Задний диван в авточехлах', car: 'Авточехлы', work: 'Задний диван' },
+  { src: '/works/auto-05.jpg', category: 'auto', alt: 'Пошив чехла на сиденье RECARO', car: 'Чехол RECARO', work: 'Пошив чехла (деталь)' },
+
+  // --- Другое (кожаные изделия и не только) ---
+  // (Одно фото удалено из публикации; оригиналы — в OneDrive/Pictures/Швей/Другое.)
+  { src: '/works/other-07.jpg', category: 'other', alt: 'Кожаный портфель ручной работы', car: 'Кожаный портфель', work: 'Ручная работа по коже', wide: true },
+  { src: '/works/other-08.jpg', category: 'other', alt: 'Кожаные сумки-слинги', car: 'Сумки-слинги', work: 'Кожаные изделия', tall: true },
+  { src: '/works/other-10.jpg', category: 'other', alt: 'Перетяжка кожаного дивана', car: 'Кожаный диван', work: 'Перетяжка мебели', wide: true },
+  { src: '/works/other-05.jpg', category: 'other', alt: 'Кожаная сумка-слинг и кошелёк', car: 'Сумка-слинг и кошелёк', work: 'Кожаные изделия' },
+  { src: '/works/other-06.jpg', category: 'other', alt: 'Кожаные портмоне с тиснением', car: 'Портмоне', work: 'Тиснение по коже' },
+  { src: '/works/other-01.jpg', category: 'other', alt: 'Кожаные сувенирные бирки с тиснением', car: 'Сувенирные бирки', work: 'Тиснение по коже' },
+  { src: '/works/other-09.jpg', category: 'other', alt: 'Кожаные сандалии ручной работы', car: 'Кожаная обувь', work: 'Сандалии ручной работы', tall: true },
+  { src: '/works/other-02.jpg', category: 'other', alt: 'Кожаный ремень с именным тиснением', car: 'Кожаный ремень', work: 'Именное тиснение' },
+  { src: '/works/other-04.jpg', category: 'other', alt: 'Кожаные подвески с тиснением Toyota', car: 'Кожаные подвески', work: 'Тиснение по коже' },
+  { src: '/works/other-11.jpg', category: 'other', alt: 'Кожаная мотоперчатка с защитой', car: 'Мотоэкипировка', work: 'Кожаная перчатка' },
 ];
 
 /** Фото для блока «О мастерской» (заменить на реальное). */

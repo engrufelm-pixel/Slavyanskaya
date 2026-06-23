@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Manrope } from 'next/font/google';
 import './globals.css';
+import { CookieConsent } from '@/components/CookieConsent';
 import { brand, contacts, seo, services } from '@/lib/site';
 
 const manrope = Manrope({
@@ -109,6 +110,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           className="pointer-events-none fixed inset-0 z-[60] bg-grain opacity-[0.035] mix-blend-soft-light"
         />
         {children}
+        <CookieConsent />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

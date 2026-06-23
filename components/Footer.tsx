@@ -84,16 +84,27 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col items-start justify-between gap-3 border-t border-white/10 pt-6 sm:flex-row sm:items-center">
-          <p className="text-xs text-white/35">
-            © {year} {brand.name}. Все права защищены.
+        <div className="mt-14 border-t border-white/10 pt-6">
+          <div className="flex flex-col items-start justify-between gap-3 sm:flex-row sm:items-center">
+            <p className="text-xs text-white/35">
+              © {year} {brand.name}. Все права защищены.
+            </p>
+            <div className="flex items-center gap-5">
+              <a href="/privacy" className="text-xs text-white/45 transition-colors hover:text-gold">
+                Политика конфиденциальности
+              </a>
+              <a href="#top" className="group flex items-center gap-2 text-xs text-white/45 transition-colors hover:text-gold">
+                Наверх
+                <span className="flex h-7 w-7 rotate-[-45deg] items-center justify-center rounded-full border border-white/15 transition-colors group-hover:border-gold">
+                  <Icon name="arrow-right" size={13} weight="bold" className="-rotate-90" />
+                </span>
+              </a>
+            </div>
+          </div>
+          <p className="mt-4 max-w-3xl text-[0.7rem] leading-relaxed text-white/25">
+            Информация на сайте носит справочный характер и не является публичной офертой (ст. 437 ГК
+            РФ). {brand.name}, {contacts.address}, {brand.city}.
           </p>
-          <a href="#top" className="group flex items-center gap-2 text-xs text-white/45 transition-colors hover:text-gold">
-            Наверх
-            <span className="flex h-7 w-7 rotate-[-45deg] items-center justify-center rounded-full border border-white/15 transition-colors group-hover:border-gold">
-              <Icon name="arrow-right" size={13} weight="bold" className="-rotate-90" />
-            </span>
-          </a>
         </div>
       </div>
     </footer>

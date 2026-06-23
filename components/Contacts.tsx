@@ -18,68 +18,68 @@ export function Contacts() {
   return (
     <section id="contacts" className="relative scroll-mt-24 bg-graphite py-24 lg:py-32">
       <div className="container-px">
-        <div className="mt-10 lg:mt-14 lg:flex lg:items-stretch lg:gap-8">
-          <Reveal className="lg:w-5/12">
-            <div className="flex h-full flex-col justify-between">
-              <div>
-                <span className="flex items-center gap-3.5">
-                  <span className="font-mono text-xs tracking-[0.2em] text-wine-soft">08</span>
-                  <span className="eyebrow">Контакты</span>
-                </span>
-                <h2 className="mt-5 font-display text-[2.15rem] font-semibold leading-[1.1] text-white text-balance sm:text-4xl lg:text-5xl">
-                  Запишитесь на консультацию
-                </h2>
-                <p className="mt-5 text-base leading-relaxed text-white/55">
-                  Оставьте заявку или напишите напрямую — рассчитаем стоимость по вашему автомобилю.
-                </p>
+        <div className="max-w-2xl">
+          <span className="flex items-center gap-3.5">
+            <span className="font-mono text-xs tracking-[0.2em] text-wine-soft">08</span>
+            <span className="eyebrow">Контакты</span>
+          </span>
+          <h2 className="mt-5 font-display text-[2.15rem] font-semibold leading-[1.1] text-white text-balance sm:text-4xl lg:text-5xl">
+            Свяжитесь с нами
+          </h2>
+          <p className="mt-5 text-base leading-relaxed text-white/55">
+            Позвоните или напишите в Max — рассчитаем стоимость по вашему автомобилю. Консультация
+            бесплатная.
+          </p>
+        </div>
+
+        <div className="mt-14 grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-8">
+          {/* Левая колонка: контакты + кнопки */}
+          <Reveal className="lg:col-span-5">
+            <div className="flex h-full flex-col gap-6">
+              <div className="divide-y divide-white/10 overflow-hidden rounded-xl2 border border-white/10 bg-white/[0.04]">
+                {infoItems.map((it) => {
+                  const inner = (
+                    <div className="flex items-center gap-4 p-5">
+                      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gold/10 text-gold">
+                        <Icon name={it.icon} size={20} weight="regular" />
+                      </span>
+                      <span className="flex flex-col leading-tight">
+                        <span className="text-xs uppercase tracking-wider text-white/40">{it.label}</span>
+                        <span className="mt-0.5 font-medium text-white">{it.value}</span>
+                      </span>
+                    </div>
+                  );
+                  return it.href ? (
+                    <a
+                      key={it.label}
+                      href={it.href}
+                      target={it.external ? '_blank' : undefined}
+                      rel={it.external ? 'noopener noreferrer' : undefined}
+                      className="block transition-colors hover:bg-charcoal/50"
+                    >
+                      {inner}
+                    </a>
+                  ) : (
+                    <div key={it.label}>{inner}</div>
+                  );
+                })}
               </div>
 
-              <div className="mt-7">
-                <div className="grid grid-cols-1 gap-px overflow-hidden rounded-xl2 border border-white/10 bg-white/[0.04] sm:grid-cols-3">
-                  {infoItems.map((it) => {
-                    const inner = (
-                      <>
-                        <span className="flex h-11 w-11 items-center justify-center rounded-full bg-gold/10 text-gold">
-                          <Icon name={it.icon} size={20} weight="regular" />
-                        </span>
-                        <span className="mt-4 block text-xs uppercase tracking-wider text-white/40">
-                          {it.label}
-                        </span>
-                        <span className="mt-1 block font-medium text-white">{it.value}</span>
-                      </>
-                    );
-                    return it.href ? (
-                      <a
-                        key={it.label}
-                        href={it.href}
-                        target={it.external ? '_blank' : undefined}
-                        rel={it.external ? 'noopener noreferrer' : undefined}
-                        className="group bg-ink p-6 transition-colors hover:bg-charcoal/60"
-                      >
-                        {inner}
-                      </a>
-                    ) : (
-                      <div key={it.label} className="bg-ink p-6">
-                        {inner}
-                      </div>
-                    );
-                  })}
-                </div>
-
-                <a
-                  href={contacts.max}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-outline w-full mt-6"
-                >
+              <div className="flex flex-col gap-3">
+                <a href={contacts.phoneHref} className="btn-gold w-full">
+                  <Icon name="phone" size={18} weight="fill" />
+                  Позвонить {contacts.phoneDisplay}
+                </a>
+                <a href={contacts.max} target="_blank" rel="noopener noreferrer" className="btn-outline w-full">
                   <MaxIcon className="h-5 w-5 rounded-[6px]" /> Написать в Max
                 </a>
               </div>
             </div>
           </Reveal>
 
-          <Reveal className="lg:w-7/12" delay={0.1}>
-            <div className="h-full ml-4 lg:ml-8">
+          {/* Правая колонка: карта */}
+          <Reveal className="lg:col-span-7" delay={0.1}>
+            <div className="flex h-full min-h-[360px] flex-col">
               <MapEmbed />
             </div>
           </Reveal>
